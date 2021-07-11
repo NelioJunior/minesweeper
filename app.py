@@ -6,6 +6,10 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route('/play')
+def ola():
+    return render_template('index.html')
+
 @app.route('/simu')
 def ola():
     return "<h1>Hello beatiful world!</h1>"
