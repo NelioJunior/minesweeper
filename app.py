@@ -13,7 +13,7 @@ def play():
 
 @app.route('/simu')
 def ola():
-    return "<h1>Hello world again!</h1>"
+    return "<h1>Hello world!</h1><br><h2>Terrific! Isn't necessary open heroku again!</h2>"
 
 @app.route("/user/<name>")
 # Exemple:   http://127.0.0.1:5000/user/john
