@@ -1,3 +1,15 @@
+'''
+tests  
+    http://127.0.0.1:5000
+    https://minesweeper-flash-python.herokuapp.com/
+
+Tip  
+    https://jinja.palletsprojects.com/en/3.0.x/
+
+                                                    Nell Jr - Jul/21
+
+'''
+
 import os 
 from flask import Flask, render_template
 
@@ -12,8 +24,6 @@ def ola():
     return "<h1>Service working</h1><br><center><h2>For heroku update waiting a few seconds</h2><center>"
 
 @app.route("/user/<name>")
-# Exemple:   http://127.0.0.1:5000/user/john
-# Tip:  https://jinja.palletsprojects.com/en/3.0.x/
 def user(name):
     return render_template('user.html', user_name=name)
 
