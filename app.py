@@ -7,7 +7,7 @@ def index():
     return render_template('index.html')
 
 @app.route('/play')
-def ola():
+def play():
     return render_template('index.html')
 
 @app.route('/simu')
