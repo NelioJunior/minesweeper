@@ -11,6 +11,8 @@ Tip
 '''
 
 import os 
+from flask import jsonify
+from flask import request
 from flask import Flask, render_template
 
 app = Flask(__name__)
@@ -18,6 +20,12 @@ app = Flask(__name__)
 @app.route("/", methods=['GET'])
 def index():
     return render_template('index.html')
+
+@app.route("/add")
+def add():
+    a = request.args.get('a')
+    b = request.args.get('b')
+    return jsonify({"result": a+b})
 
 @app.route('/simu')
 def ola():
@@ -33,7 +41,7 @@ def page_not_found(e):
 
 def main():
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=80)
 
 if __name__ == "__main__":
     main()
