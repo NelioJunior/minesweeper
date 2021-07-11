@@ -29,7 +29,7 @@ def add():
 
 @app.route('/simu')
 def ola():
-    return "<h1>Service working</h1><br><center><h2>For heroku update waiting a few seconds</h2><center>"
+    return "<h1>Service working</h1><br><center><h2>For heroku update just waiting a few seconds</h2><center>"
 
 @app.route("/user/<name>")
 def user(name):
