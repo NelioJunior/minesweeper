@@ -21,11 +21,12 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route("/add")
+@app.route("/add")                          # http://127.0.0.1:5000/add?a=10&b=20
 def add():
     a = request.args.get('a')
     b = request.args.get('b')
-    return jsonify({"result": a+b})
+    value = int(a) + int(b) 
+    return jsonify({"result": value})
 
 @app.route('/simu')
 def ola():

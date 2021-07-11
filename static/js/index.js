@@ -7,6 +7,7 @@ var components = {
     colors : {1: 'blue', 2: 'green', 3: 'red', 4: 'purple', 5: 'maroon', 6: 'turquoise', 7: 'black', 8: 'grey'}
 }
 
+
 function startGame() {
     components.bombs = placeBombs();
     document.getElementById('field').appendChild(createTable());
@@ -212,6 +213,22 @@ function reload(){
 }
 
 window.addEventListener('load', function() {
-    document.getElementById('lost').style.display="none";
+    document.getElementById('lost').style.display="none";    
     startGame();
+
+    btnAdd.onclick = (e) => {
+
+        let first = 10;
+        let second = 20;       
+        let url = './add?a='+first+'&b='+second ;  
+
+        fetch(url)
+          .then((response) => {
+            return response.json();
+          })
+          .then((myJson) => {
+               alert("When I sun "+first+" and "+second+" I get: " + myJson.result);
+          });
+
+    }    
 });
