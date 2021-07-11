@@ -1,10 +1,7 @@
 import os 
 from flask import Flask, render_template
-from flask_cors import CORS 
 
 app = Flask(__name__)
-
-cors = CORS (app, resource={r"/*":{"origins": "*"}})
 
 @app.route("/", methods=['GET'])
 def index():
@@ -16,7 +13,7 @@ def play():
 
 @app.route('/simu')
 def ola():
-    return "<h1>Hello beatiful world!</h1>"
+    return "<h1>Hello world again!</h1>"
 
 @app.route("/user/<name>")
 # Exemple:   http://127.0.0.1:5000/user/john
