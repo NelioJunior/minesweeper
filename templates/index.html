@@ -2,9 +2,9 @@
 <html>
   <head>
     <title>Minesweeper</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="index.css" type="text/css">
-    <script type="text/javascript" src="./index.js"></script>
+    <meta charset="UTF-8">       
+    <link href="{{ url_for('static', filename='css/index.css')}}" rel="stylesheet">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/index.js')}}"></script>
   </head>
   <body>
       <div id="box">
