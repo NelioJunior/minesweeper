@@ -63,6 +63,7 @@ def placeSingleBomb(bombs):
     nrow = random.randint(0,rowsNumber)
     ncol = random.randint(0,colsNumber)
 
+    '''
     try:
         row = bombs[nrow]
     except:
@@ -73,7 +74,7 @@ def placeSingleBomb(bombs):
         placeSingleBomb(bombs)
     except:
         row[ncol] = True
-
+    '''
 
     return ""
 

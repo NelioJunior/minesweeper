@@ -9,7 +9,7 @@ var components = {
     colors : {1: 'blue', 2: 'green', 3: 'red', 4: 'purple', 5: 'maroon', 6: 'turquoise', 7: 'black', 8: 'grey'}
 }
 
-
+/*
 var components = {
     num_of_rows : 5,
     num_of_cols : 6,
@@ -18,7 +18,7 @@ var components = {
     alive : true,
     colors : {1: 'blue', 2: 'green', 3: 'red', 4: 'purple', 5: 'maroon', 6: 'turquoise', 7: 'black', 8: 'grey'}
 }
-
+*/
 
 function startGame() {
     // components.bombs = placeBombs();    // old Version 
