@@ -36,12 +36,26 @@ button {
     border-radius: 20px 20px 20px 20px;
 }
 
-#btnAdd:hover
+#btnSettings {
+    padding: 7px 6px;
+    font-family: futura_maxi_cg_demiregular,tahoma, arial, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 18px;
+    border-radius: 6px;
+    background-color: #595959!important;
+    position: fixed;
+    top:10px;
+    right: 10px;        
+}
+
+#btnSettings:hover
 {
-    background-color:#ff00ff !important;
+    background-color: gray!important;
 }
 
 #btnAdd {
+    display: none; 
     padding: 13px 16px;
     font-family: futura_maxi_cg_demiregular,tahoma, arial, sans-serif;
     font-size: 16px;
@@ -49,4 +63,9 @@ button {
     line-height: 18px;
     border-radius: 6px;
     background-color:green!important;
+}
+
+#btnAdd:hover
+{
+    background-color:#ff00ff !important;
 }

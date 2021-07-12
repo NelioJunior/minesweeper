@@ -1,3 +1,5 @@
+'use strict';
+
 var components = {
     num_of_rows : 12,
     num_of_cols : 24,
@@ -8,9 +10,42 @@ var components = {
 }
 
 
+var components = {
+    num_of_rows : 5,
+    num_of_cols : 6,
+    num_of_bombs : 7,
+    bomb : '💣',
+    alive : true,
+    colors : {1: 'blue', 2: 'green', 3: 'red', 4: 'purple', 5: 'maroon', 6: 'turquoise', 7: 'black', 8: 'grey'}
+}
+
+
 function startGame() {
-    components.bombs = placeBombs();
-    document.getElementById('field').appendChild(createTable());
+    // components.bombs = placeBombs();    // old Version 
+
+    // let stringuified = JSON.stringify(placeBombs());
+    // let backToJson = JSON.parse(stringuified);
+    // components.bombs = backToJson; 
+    // field.appendChild(createTable());   
+
+    while (field.lastElementChild) {
+        field.removeChild(field.lastElementChild);
+    }
+
+    let url = './placeBombs?bombs=' + components.num_of_bombs + '&rows='+components.num_of_rows + '&cols='+components.num_of_cols;  
+
+    fetch(url)
+      .then((response) => {
+        return response.json();
+      })
+      .then((jsonResp) => {
+           // components.bombs = JSON.parse(jsonResp) ;
+
+           components.bombs = placeBombs();
+
+           field.appendChild(createTable());    
+      });
+
 }
 
 function placeBombs() {
@@ -39,8 +74,7 @@ function placeSingleBomb(bombs) {
     if (!col) {
         row[ncol] = true;
         return
-    } 
-    else {
+    } else {
         placeSingleBomb(bombs);
     }
 }
@@ -122,6 +156,7 @@ function addCellListeners(td, i, j) {
 }
 
 function handleCellClick(cell, i, j) {
+
     if (!components.alive) {
         return;
     }
@@ -137,10 +172,9 @@ function handleCellClick(cell, i, j) {
         cell.textContent = components.bomb;
         gameOver();
         
-    }
-    else {
+    } else {
         cell.style.backgroundColor = 'lightGrey';
-        num_of_bombs = adjacentBombs(i, j);
+        let num_of_bombs = adjacentBombs(i, j);
         if (num_of_bombs) {
             cell.style.color = components.colors[num_of_bombs];
             cell.textContent = num_of_bombs;
@@ -216,8 +250,44 @@ window.addEventListener('load', function() {
     document.getElementById('lost').style.display="none";    
     startGame();
 
-    btnAdd.onclick = (e) => {
+    btnSettings.onclick = () => {
+        let rowsNumber = prompt("Please enter number of rows", 12);
+        if (rowsNumber == NaN) {
+            alert("Enter with a valid number");
+            return; 
+        } else if (rowsNumber == null) {
+            return;             
+        }
 
+        let columsNumber = prompt("Please enter number of columns", 24);
+        if (columsNumber == NaN) {
+            alert("Enter with a valid number");
+            return; 
+        } else if (columsNumber == null) {
+            return;             
+        }
+
+        let bombsNumber = prompt("Please enter number of mines", 55);
+        if (bombsNumber == NaN) {
+            alert("Enter with a valid number");
+            return; 
+        } else if (bombsNumber == null) {
+            return;             
+        }
+
+        components = {
+            num_of_rows : parseInt(rowsNumber) ,
+            num_of_cols : parseInt(columsNumber) ,
+            num_of_bombs : parseInt(bombsNumber) ,
+            bomb : '💣',
+            alive : true,
+            colors : {1: 'blue', 2: 'green', 3: 'red', 4: 'purple', 5: 'maroon', 6: 'turquoise', 7: 'black', 8: 'grey'}
+        }
+
+        startGame();
+    }
+
+    btnAdd.onclick = (e) => {
         let first = 10;
         let second = 20;       
         let url = './add?a='+first+'&b='+second ;  
