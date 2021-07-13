@@ -41,9 +41,12 @@ def placeBombs():
         rows.append(cols)
 
     for idx in range(bombs):
-        nrow = random.randint(0,rowsNumber -1)
-        ncol = random.randint(0,colsNumber -1)
-        rows[nrow][ncol] = True 
+        while True:
+            nrow = random.randint(0,rowsNumber -1)
+            ncol = random.randint(0,colsNumber -1)
+            if rows[nrow][ncol] != True:  
+                rows[nrow][ncol] = True
+                break 
     
     return jsonify(rows)
 
