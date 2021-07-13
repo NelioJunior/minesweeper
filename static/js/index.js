@@ -1,12 +1,16 @@
 'use strict';
 
-var components = {
-    num_of_rows : 12,
-    num_of_cols : 24,
-    num_of_bombs : 55,
-    bomb : '💣',
-    alive : true,
-    colors : {1: 'blue', 2: 'green', 3: 'red', 4: 'purple', 5: 'maroon', 6: 'turquoise', 7: 'black', 8: 'grey'}
+var minesweerJson = JSON.parse(localStorage.getItem("minesweerJson"));
+
+if (minesweerJson == null) {
+   minesweerJson = {
+        num_of_rows : 12,
+        num_of_cols : 24,
+        num_of_bombs : 55,
+        bomb : '💣',
+        alive : true,
+        colors : {1: 'blue', 2: 'green', 3: 'red', 4: 'purple', 5: 'maroon', 6: 'turquoise', 7: 'black', 8: 'grey'}
+    }
 }
 
 function startGame() {
@@ -15,14 +19,14 @@ function startGame() {
         field.removeChild(field.lastElementChild);
     }
 
-    let url = './placeBombs?bombs=' + components.num_of_bombs + '&rows='+components.num_of_rows + '&cols='+components.num_of_cols;  
+    let url = './placeBombs?bombs=' + minesweerJson.num_of_bombs + '&rows='+minesweerJson.num_of_rows + '&cols='+minesweerJson.num_of_cols;  
 
     fetch(url)
       .then((response) => {
         return response.json();
       })
       .then((jsonResp) => {
-           components.bombs = jsonResp ;
+           minesweerJson.bombs = jsonResp ;
            field.appendChild(createTable());    
       });
 }
@@ -35,9 +39,9 @@ function createTable() {
     var table, row, td, i, j;
     table = document.createElement('table');
     
-    for (i=0; i<components.num_of_rows; i++) {
+    for (i=0; i<minesweerJson.num_of_rows; i++) {
         row = document.createElement('tr');
-        for (j=0; j<components.num_of_cols; j++) {
+        for (j=0; j<minesweerJson.num_of_cols; j++) {
             td = document.createElement('td');
             td.id = cellID(i, j);
             row.appendChild(td);
@@ -50,10 +54,10 @@ function createTable() {
 
 function addCellListeners(td, i, j) {
     td.addEventListener('mousedown', function(event) {
-        if (!components.alive) {
+        if (!minesweerJson.alive) {
             return;
         }
-        components.mousewhiches += event.which;
+        minesweerJson.mousewhiches += event.which;
         if (event.which === 3) {
             return;
         }
@@ -65,15 +69,15 @@ function addCellListeners(td, i, j) {
 
     td.addEventListener('mouseup', function(event) {
       
-        if (!components.alive) {
+        if (!minesweerJson.alive) {
             return;
         }
 
-        if (this.clicked && components.mousewhiches == 4) {
+        if (this.clicked && minesweerJson.mousewhiches == 4) {
             performMassClick(this, i, j);
         }
 
-        components.mousewhiches = 0;
+        minesweerJson.mousewhiches = 0;
         
         if (event.which === 3) {
            
@@ -85,7 +89,7 @@ function addCellListeners(td, i, j) {
                 this.textContent = '';
             } else {
                 this.flagged = true;
-                this.textContent = components.flag;
+                this.textContent = minesweerJson.flag;
             }
 
             event.preventDefault();
@@ -105,7 +109,7 @@ function addCellListeners(td, i, j) {
 
 function handleCellClick(cell, i, j) {
 
-    if (!components.alive) {
+    if (!minesweerJson.alive) {
         return;
     }
 
@@ -115,16 +119,16 @@ function handleCellClick(cell, i, j) {
 
     cell.clicked = true;
 
-    if (components.bombs[i][j]) {
+    if (minesweerJson.bombs[i][j]) {
         cell.style.color = 'red';
-        cell.textContent = components.bomb;
+        cell.textContent = minesweerJson.bomb;
         gameOver();
         
     } else {
         cell.style.backgroundColor = 'lightGrey';
         let num_of_bombs = adjacentBombs(i, j);
         if (num_of_bombs) {
-            cell.style.color = components.colors[num_of_bombs];
+            cell.style.color = minesweerJson.colors[num_of_bombs];
             cell.textContent = num_of_bombs;
         } 
         else {
@@ -139,7 +143,7 @@ function adjacentBombs(row, col) {
 
     for (i=-1; i<2; i++) {
         for (j=-1; j<2; j++) {
-            if (components.bombs[row + i] && components.bombs[row + i][col + j]) {
+            if (minesweerJson.bombs[row + i] && minesweerJson.bombs[row + i][col + j]) {
                 num_of_bombs++;
             }
         }
@@ -185,7 +189,7 @@ function performMassClick(cell, row, col) {
 }
 
 function gameOver() {
-    components.alive = false;
+    minesweerJson.alive = false;
     document.getElementById('lost').style.display="block";
     
 }
@@ -199,7 +203,7 @@ window.addEventListener('load', function() {
     startGame();
 
     btnSettings.onclick = () => {
-        let rowsNumber = prompt("Please enter number of rows", 12);
+        let rowsNumber = prompt("Please enter number of rows", minesweerJson.num_of_rows);
         if (rowsNumber == NaN) {
             alert("Enter with a valid number");
             return; 
@@ -207,7 +211,7 @@ window.addEventListener('load', function() {
             return;             
         }
 
-        let columsNumber = prompt("Please enter number of columns", 24);
+        let columsNumber = prompt("Please enter number of columns", minesweerJson.num_of_cols);
         if (columsNumber == NaN) {
             alert("Enter with a valid number");
             return; 
@@ -215,7 +219,7 @@ window.addEventListener('load', function() {
             return;             
         }
 
-        let bombsNumber = prompt("Please enter number of mines", 55);
+        let bombsNumber = prompt("Please enter number of mines", minesweerJson.num_of_bombs);
         if (bombsNumber == NaN) {
             alert("Enter with a valid number");
             return; 
@@ -223,7 +227,7 @@ window.addEventListener('load', function() {
             return;             
         }
 
-        components = {
+        minesweerJson = {
             num_of_rows : parseInt(rowsNumber) ,
             num_of_cols : parseInt(columsNumber) ,
             num_of_bombs : parseInt(bombsNumber) ,
@@ -231,6 +235,8 @@ window.addEventListener('load', function() {
             alive : true,
             colors : {1: 'blue', 2: 'green', 3: 'red', 4: 'purple', 5: 'maroon', 6: 'turquoise', 7: 'black', 8: 'grey'}
         }
+
+        localStorage.setItem("minesweerJson", JSON.stringify(minesweerJson));
 
         startGame();
     }
