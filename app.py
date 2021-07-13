@@ -3,11 +3,7 @@ tests
     http://127.0.0.1:5000
     https://minesweeper-flash-python.herokuapp.com/
 
-Tip  
-    https://jinja.palletsprojects.com/en/3.0.x/
-
                                                     Nell Jr - Jul/21
-
 '''
 
 import os
