@@ -8,14 +8,12 @@ This project was made in response to the challenge proposed by the company Devig
 
 ## Rule 
 
-    The rule of the game is simple, the number on a block shows the number of mines adjacent to it and you have to flag all the mines.
+The rule of the game is simple, the number on a block shows the number of mines adjacent to it and you have to flag all the mines.
 
 
 ## Settings
 
-    if you wish, you can change parameters such as number of bombs, rows and columns, click on the button symbolized by a gear located at the top and right of the page
+if you wish, you can change parameters such as number of bombs, rows and columns, click on the button symbolized by a gear located at the top and right of the page
 
 
-
-
-##                                                                                                                          Nell Junior - july -2021
+## Nell Junior - july -2021
