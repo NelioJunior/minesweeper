@@ -9,24 +9,7 @@ var components = {
     colors : {1: 'blue', 2: 'green', 3: 'red', 4: 'purple', 5: 'maroon', 6: 'turquoise', 7: 'black', 8: 'grey'}
 }
 
-/*
-var components = {
-    num_of_rows : 5,
-    num_of_cols : 6,
-    num_of_bombs : 7,
-    bomb : '💣',
-    alive : true,
-    colors : {1: 'blue', 2: 'green', 3: 'red', 4: 'purple', 5: 'maroon', 6: 'turquoise', 7: 'black', 8: 'grey'}
-}
-*/
-
 function startGame() {
-    // components.bombs = placeBombs();    // old Version 
-
-    // let stringuified = JSON.stringify(placeBombs());
-    // let backToJson = JSON.parse(stringuified);
-    // components.bombs = backToJson; 
-    // field.appendChild(createTable());   
 
     while (field.lastElementChild) {
         field.removeChild(field.lastElementChild);
@@ -39,44 +22,9 @@ function startGame() {
         return response.json();
       })
       .then((jsonResp) => {
-           // components.bombs = JSON.parse(jsonResp) ;
-
-           components.bombs = placeBombs();
-
+           components.bombs = jsonResp ;
            field.appendChild(createTable());    
       });
-
-}
-
-function placeBombs() {
-    var i, rows = [];
-    
-    for (i=0; i<components.num_of_bombs; i++) {
-        placeSingleBomb(rows);
-    }
-    return rows;
-} 
-
-function placeSingleBomb(bombs) {
-
-    var nrow, ncol, row, col;
-    nrow = Math.floor(Math.random() * components.num_of_rows);
-    ncol = Math.floor(Math.random() * components.num_of_cols);
-    row = bombs[nrow];
-    
-    if (!row) {
-        row = [];
-        bombs[nrow] = row;
-    }
-    
-    col = row[ncol];
-    
-    if (!col) {
-        row[ncol] = true;
-        return
-    } else {
-        placeSingleBomb(bombs);
-    }
 }
 
 function cellID(i, j) {

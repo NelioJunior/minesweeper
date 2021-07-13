@@ -43,41 +43,34 @@ def page_not_found(e):
 
 @app.route("/placeBombs")                          
 def placeBombs():
-    rows = []
-    bombsNumber = request.args.get('bombs')
-    bombsNumber = int(bombsNumber)
+    bombs = request.args.get('bombs')
+    bombs = int(bombs)
 
-    for idx in range(bombsNumber):
-        placeSingleBomb(rows)
-
-    rows = "[[null,null,null,null,true,null,null,null,true,null,null,null,null,null,null,null,null,null,null,null,null,true],[null,null,true],[null,null,null,true,true,null,null,null,null,true,true,true,null,null,null,true,true,null,true],[null,null,null,null,null,null,null,true,null,null,null,null,null,null,null,null,null,null,null,true,true,true],[null,null,null,null,true,null,null,null,null,true,null,true,true,null,null,null,null,null,null,null,null,null,true],[null,true,null,true,null,null,null,null,null,null,null,null,null,null,true,null,null,true,null,null,true,true],[true,null,true,null,null,null,null,null,null,null,null,true,null,true,null,null,null,null,null,null,true],[null,true,null,null,null,null,null,null,null,true,null,null,null,null,null,true,null,true,null,null,null,true,true,true],[true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true],[null,null,null,true,null,true,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,true],[null,null,null,true,true,null,null,null,true,null,null,null,null,null,true,null,null,true],[true,null,null,true,null,null,null,null,null,null,null,null,true,true,null,null,null,null,null,null,null,true,null,true]]"
-    return jsonify(rows)
-
-def placeSingleBomb(bombs):
     rowsNumber = request.args.get('rows')
-    rowsNumber = int(rowsNumber)
+    rowsNumber = int(rowsNumber) -1
 
     colsNumber = request.args.get('cols')
-    colsNumber = int(colsNumber)
+    colsNumber = int(colsNumber) -1 
 
-    nrow = random.randint(0,rowsNumber)
-    ncol = random.randint(0,colsNumber)
+    rows = [[None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None],
+            [None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None],
+            [None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None],
+            [None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None],
+            [None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None],
+            [None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None],
+            [None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None],
+            [None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None],
+            [None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None],
+            [None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None],
+            [None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None],
+            [None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None]]
 
-    '''
-    try:
-        row = bombs[nrow]
-    except:
-        bombs.append("[]")
-
-    try:
-        col = row[ncol]
-        placeSingleBomb(bombs)
-    except:
-        row[ncol] = True
-    '''
-
-    return ""
-
+    for idx in range(bombs):
+        nrow = random.randint(0,rowsNumber)
+        ncol = random.randint(0,colsNumber)
+        rows[nrow][ncol] = True 
+    
+    return jsonify(rows)
 
 def main():
     port = int(os.environ.get("PORT", 5000))
