@@ -53,19 +53,3 @@ button {
 {
     background-color: gray!important;
 }
-
-#btnAdd {
-    display: none; 
-    padding: 13px 16px;
-    font-family: futura_maxi_cg_demiregular,tahoma, arial, sans-serif;
-    font-size: 16px;
-    font-weight: bold;
-    line-height: 18px;
-    border-radius: 6px;
-    background-color:green!important;
-}
-
-#btnAdd:hover
-{
-    background-color:#ff00ff !important;
-}
