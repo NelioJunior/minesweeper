@@ -235,18 +235,4 @@ window.addEventListener('load', function() {
         startGame();
     }
 
-    btnAdd.onclick = (e) => {
-        let first = 10;
-        let second = 20;       
-        let url = './add?a='+first+'&b='+second ;  
-
-        fetch(url)
-          .then((response) => {
-            return response.json();
-          })
-          .then((myJson) => {
-               alert("When I sun "+first+" and "+second+" I get: " + myJson.result);
-          });
-
-    }    
 });
