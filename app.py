@@ -22,21 +22,6 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route("/add")                          
-def add():
-    a = request.args.get('a')
-    b = request.args.get('b')
-    value = int(a) + int(b) 
-    return jsonify({"result": value})
-
-@app.route('/simu')
-def ola():
-    return "<h1>Service working</h1><br><center><h2>For heroku update just waiting a few seconds</h2><center>"
-
-@app.route("/user/<name>")
-def user(name):
-    return render_template('user.html', user_name=name)
-
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("404.html")
