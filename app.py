@@ -28,27 +28,21 @@ def placeBombs():
     bombs = int(bombs)
 
     rowsNumber = request.args.get('rows')
-    rowsNumber = int(rowsNumber) -1
+    rowsNumber = int(rowsNumber) 
 
     colsNumber = request.args.get('cols')
-    colsNumber = int(colsNumber) -1 
+    colsNumber = int(colsNumber)  
 
-    rows = [[None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None],
-            [None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None],
-            [None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None],
-            [None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None],
-            [None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None],
-            [None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None],
-            [None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None],
-            [None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None],
-            [None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None],
-            [None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None],
-            [None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None],
-            [None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None,None]]
+    rows = []
+    for x in range(rowsNumber):
+        cols = []  
+        for y in range(colsNumber):    
+            cols.append(None) 
+        rows.append(cols)
 
     for idx in range(bombs):
-        nrow = random.randint(0,rowsNumber)
-        ncol = random.randint(0,colsNumber)
+        nrow = random.randint(0,rowsNumber -1)
+        ncol = random.randint(0,colsNumber -1)
         rows[nrow][ncol] = True 
     
     return jsonify(rows)
