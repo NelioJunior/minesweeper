@@ -17,3 +17,8 @@ if you wish, you can change parameters such as number of bombs, rows and columns
 
 
 ## Nell Junior - july -2021
+
+
+## Update - November - 2031 
+
+Now in addition to gaming, this algorithm has become more useful because it obtains the ngrok link from Google Drive (provisional use)

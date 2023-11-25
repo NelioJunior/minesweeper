@@ -8,6 +8,7 @@ tests
 
 import os
 import random
+import requests
 from flask import jsonify
 from flask import request
 from flask import Flask, render_template
@@ -53,6 +54,21 @@ def placeBombs():
 def main():
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
+
+@app.route("/getngroklink")                          
+def getngroklink():
+
+    ngroklink = "" 
+    url = 'https://drive.google.com/uc?id=1QM6CBP2OXdGi-FQMm41ZACc4i0NPMs66'
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        ngroklink = response.text
+        print("Conteúdo do arquivo do Google Drive armazenado na variável ngroklink.")
+    else:
+        print("Erro ao obter o conteúdo do arquivo do Google Drive. Código de status:", response.status_code)
+
+    return ngroklink    
 
 if __name__ == "__main__":
     main()
