@@ -14,6 +14,8 @@ from flask import request
 from flask import Flask, render_template
 from flask_cors import CORS   
 
+context = ('/home/nelljr/certificates/nelltek_ddns_net.pem','/home/nelljr/certificates/sua_chave_privada.key')
+
 app = Flask(__name__)
 CORS(app)
 
@@ -55,7 +57,7 @@ def placeBombs():
 
 def main():
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=port, ssl_context=context)
 
 @app.route("/getngroklink")                          
 def getngroklink():
